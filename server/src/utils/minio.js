@@ -47,13 +47,22 @@ const removeBucket = async () => {
 // // Upload the file with fPutObject
 // // If an object with the same name exists,
 // // it is updated with new data
-const storeFileInMinio = async (fileName, path, metaData) => {
-	await minioClient.fPutObject(bucket, fileName, path, metaData);
-	console.log(
-		"File " + fileName + " uploaded as object " + path + " in bucket " + bucket
-	);
-};
+const storeFileInMinio = async (fileToUpload) => {
+	console.log("storeFileInMinio called");
+	console.log("fileName:", fileToUpload.filename);
 
+	// The path in MinIO should be `id/<fileName>`
+	const id = fileToUpload.destination.split("/")[4]; // Extract the ID from the folder structure
+	const minioPath = `${id}/${fileToUpload.filename}`;
+
+	try {
+		// Upload the file to MinIO with the simplified path
+		await minioClient.fPutObject(bucket, minioPath, fileToUpload.path, {});
+		console.log("File stored in MinIO successfully at path:", minioPath);
+	} catch (err) {
+		console.log("Error storing file in MinIO:", err.message);
+	}
+};
 const getFileFromMinio = async (response, filePath) => {
 	let size = 0;
 	minioClient.getObject(bucket, filePath, (err, dataStream) => {
@@ -88,9 +97,11 @@ const getUrl = async (filePathName) => {
 };
 
 export {
+	minioClient,
 	isBucketExist,
 	listBuckets,
 	storeFileInMinio,
 	getFileFromMinio,
 	getUrl,
+	removeBucket,
 };

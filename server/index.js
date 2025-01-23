@@ -3,8 +3,20 @@ dotenv.config();
 
 import { connectDB } from "./src/db/connection.js";
 import { app } from "./app.js";
+import { minioClient } from "./src/utils/minio.js";
 
-const PORT = process.env.PORT || 6001
+const PORT = process.env.PORT || 6001;
+
+// minio connect
+try {
+	if (minioClient) {
+		console.log(
+			`Connected to Minio at : http://${minioClient.host}:${minioClient.port}`
+		);
+	}
+} catch (err) {
+	console.log("Error Connecting Minio" , err);
+}
 
 // connect DB
 connectDB()

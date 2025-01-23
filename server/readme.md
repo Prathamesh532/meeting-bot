@@ -1,3 +1,17 @@
+### DB Connection
+-   mongoose gave a **.connect **function which take the args(URL , Options)
+
+- **process.exit()** : method in Node.js used to terminate the Node.js process programmatically
+    Common Exit Codes:
+**0**: Success.
+**1**: General failure or unspecified error.
+**2**: Misuse of shell built-ins (e.g., invalid usage of a command).
+**126**: Command invoked cannot execute.
+**127**: Command not found.
+**128**: Invalid argument to exit().
+**greater than 128**: Termination due to a signal (e.g., 130 for Ctrl+C, which is signal 2 + 128).
+
+
 ### Features of npm multer
 - **File Uploads**: Allows uploading files from client-side forms to the server.
 - **Middleware**: Integrates seamlessly with Express.js middleware, making it easy to handle file uploads within routes.
@@ -14,3 +28,5 @@ The multipart/form-data is a content-type that makes the browsers encode the for
 Multer is widely used because it is simple, very efficient, and also supports multiple file uploads. Multer manipulates the request object by adding two objects to it - namely the body object and file/files objects. The body object added by Multer contains the data from the text fields in the HTML form. The file or file object contains the files that are uploaded in the form. They can be accessed as req.body and req.file or req.files where req is the request object.
 
 Processing of only multipart data (multipart/form-data) can be done with the help of Multer. No other format can be processed. In this article, you will learn how you can use Multer in Node.js to ease out the process of handling multiple file uploads. Multer also provides a lot of options or settings that are applied during the file storage.
+
+https://www.scaler.com/topics/nodejs/multer-in-node-js/

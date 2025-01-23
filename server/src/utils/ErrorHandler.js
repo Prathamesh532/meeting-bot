@@ -47,6 +47,8 @@ export const throwError = (message, statusCode) => {
 	throw new CustomError(message, statusCode);
 };
 
-export const successResponse = (res, message, data) => {
-	res.status(200).json({ message, data });
+export const successResponse = (message, data) => {
+  //string message and data  object is expected here, cannot wrap successResponse into try catch,as it also throws error to send back response internally
+  let resObj = { message: message, data: data };
+  throw new CustomError(JSON.stringify(resObj), 200);
 };
